@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema Aluna{% endblock %}</title>
+    
+    <link rel="icon" type="image/png" href="{% static 'imagens/Aluna Logo.png' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.3/index.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
+    
+    <link rel="stylesheet" href="{% static 'estudantes/css/estilo.css' %}">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+
+    <div class="app-wrapper">
+        
+        <nav class="app-header navbar navbar-expand bg-black navbar-dark shadow-sm" style="height: 60px;">
+            <div class="container-fluid">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center gap-2 ms-2">
+                        <img src="{% static 'imagens/Aluna Logo.png' %}" alt="Logo" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+                        <span class="navbar-brand mb-0 h1 text-white fs-5">Aluna</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <aside class="app-sidebar bg-dark shadow" data-bs-theme="dark" style="background-color: #191919 !important;">
+            <div class="sidebar-brand">
+                <span class="brand-text fw-light text-uppercase tracking-wider" style="color: #761919; font-size: 0.8rem; font-weight: bold;">Menu</span>
+            </div>
+            
+            <div class="sidebar-wrapper">
+                <nav class="mt-2">
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu">
+                        
+                        <li class="nav-item">
+                            <a href="{% url 'estudantes:index' %}" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>Início</p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="{% url 'estudantes:adicionar' %}" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>Novo Aluno</p>
+                            </a>
+                        </li>
+                        
+                       <li class="nav-item">
+                             <a href="{% url 'cursos:listar_cursos' %}" class="nav-link">
+                                <i class="nav-icon fas fa-graduation-cap"></i>
+                                <p>Gerenciar Cursos</p>
+                            </a>
+                       </li>
+
+                       <li class="nav-item">
+                             <a href="{% url 'desempenho:notas' %}" class="nav-link">
+                                <i class="nav-icon fas fa-file-invoice"></i>
+                                <p>Lançar Notas</p>
+                            </a>
+                       </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="app-main p-4">
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+
+        <footer class="app-footer text-center py-3" style="background: #30130d; color: #f4f0f7; border-top: 1px solid #490707;">
+            <div class="float-end d-none d-sm-inline">v4.0</div>
+            <strong>© 2026 Desenvolvido por Sara</strong>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

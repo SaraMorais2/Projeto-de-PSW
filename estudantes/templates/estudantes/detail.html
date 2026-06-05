@@ -1,0 +1,30 @@
+{% extends "estudantes/base.html" %}
+
+{% block title %}Perfil: {{ aluno.nome }}{% endblock %}
+
+{% block content %}
+    
+    <div class="card shadow-sm border-0">
+        <div class="card-header text-white" style="background-color: #19081E;">
+            <h3 class="mb-0">Dados do Aluno</h3>
+        </div>
+        <div class="card-body p-4">
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold text-muted">Nome:</div>
+                <div class="col-sm-9 fs-5">{{ aluno.nome }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold text-muted">Matrícula:</div>
+                <div class="col-sm-9">{{ aluno.matricula }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold text-muted">Curso:</div>
+                <div class="col-sm-9 text-uppercase">{{ aluno.curso }}</div>
+            </div>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-end gap-2">
+            <a href="{% url 'estudantes:index' %}" class="btn btn-secondary">Voltar</a>
+            <a href="{% url 'estudantes:atualizar' aluno.id %}" class="btn btn-warningpx-4 py-2" style="background-color: #830a98; border: none;"">Editar Dados</a>
+        </div>
+    </div>
+{% endblock %}
