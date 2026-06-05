@@ -1,0 +1,77 @@
+/* Estrutura Geral */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8f9fa;
+}
+
+/* Navbar fixa */
+.navbar {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #343a40;
+}
+
+/* Container Principal */
+.main-container {
+    display: flex;
+    flex: 1;
+    margin-top: 56px; /* Altura da navbar */
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 200px;
+    background: #212529;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+}
+
+.sidebar h5 {
+    color: #6c757d;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    color: #adb5bd;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #343a40;
+    color: #ffc107;
+}
+
+/* Área de Conteúdo */
+.content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 30px;
+}
+
+/* Rodapé */
+footer {
+    margin-left: 250px;
+    background: #212529;
+    color: #6c757d;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar { display: none; }
+    .content, footer { margin-left: 0; }
+}
