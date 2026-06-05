@@ -1,0 +1,57 @@
+{% extends "estudantes/base.html" %}
+
+{% block title %}Lista de Cursos{% endblock %}
+
+{% block content %}
+<div class="container-fluid pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0 fw-bold" style="color: #19081E;">Cursos Cadastrados</h2>
+        <a href="{% url 'cursos:adicionar_curso' %}" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background-color: #761919; border: none; border-radius: 6px;">
+            <i class="fas fa-plus me-2"></i> Novo Curso
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0"> 
+            {% if cursos %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="text-white" style="background-color: #19081E;">
+                            <tr>
+                                <th class="ps-4">Nome do Curso</th>
+                                <th>Código</th>
+                                <th>Carga Horária</th>
+                                <th>Turno</th>
+                                <th class="text-end pe-4">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for curso in cursos %}
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark fs-6">{{ curso.nome }}</td>
+                                <td class="text-secondary fw-semibold">{{ curso.codigo }}</td>
+                                <td><span class="badge bg-secondary p-2">{{ curso.carga_horaria }}h</span></td>
+                                <td>
+                                    <span class="fw-semibold" style="color: #3A1844;">{{ curso.turno }}</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group shadow-sm">
+                                        <a href="{% url 'cursos:atualizar_curso' id=curso.id %}" class="btn btn-sm btn-outline-warning fw-semibold px-3">Editar</a>
+                                        <a href="{% url 'cursos:deletar_curso' id=curso.id %}?confirm=yes" onclick="return confirm('Tem certeza que deseja excluir o curso {{ curso.nome }}?')" class="btn btn-sm btn-outline-danger fw-semibold px-3">Excluir</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="p-5 text-center">
+                    <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                    <p class="text-muted mb-0 fs-5">Nenhum curso cadastrado no sistema Aluna até o momento.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

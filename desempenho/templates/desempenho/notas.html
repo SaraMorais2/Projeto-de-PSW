@@ -1,0 +1,59 @@
+{% extends "estudantes/base.html" %}
+
+{% block title %}Boletim Geral{% endblock %}
+
+{% block content %}
+<div class="container-fluid pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0 fw-bold" style="color: #19081E;">Notas e Desempenho</h2>
+        <a href="{% url 'desempenho:adicionar_nota' %}" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background-color: #761919; border: none; border-radius: 6px;">
+            <i class="fas fa-plus me-2"></i> Lançar Nota
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0"> 
+            {% if notas %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="text-white" style="background-color: #19081E;">
+                            <tr>
+                                <th class="ps-4">Aluno</th>
+                                <th>Matrícula</th>
+                                <th>Disciplina</th>
+                                <th>Nota Final</th>
+                                <th class="text-end pe-4">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for nota in notas %}
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark fs-6">{{ nota.aluno.nome }}</td>
+                                <td class="text-secondary fw-semibold">{{ nota.aluno.matricula }}</td>
+                                <td>{{ nota.disciplina }}</td>
+                                <td>
+                                    <span class="badge p-2 {% if nota.valor >= 7.0 %}bg-success{% else %}bg-danger{% endif %} fs-6">
+                                        {{ nota.valor }}
+                                    </span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group shadow-sm">
+                                        <a href="{% url 'desempenho:atualizar_nota' id=nota.id %}" class="btn btn-sm btn-outline-warning fw-semibold px-3">Editar</a>
+                                        <a href="{% url 'desempenho:deletar_nota' id=nota.id %}?confirm=yes" onclick="return confirm('Excluir a nota de {{ nota.aluno.nome }}?')" class="btn btn-sm btn-outline-danger fw-semibold px-3">Excluir</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="p-5 text-center">
+                    <i class="fas fa-file-invoice fa-3x text-muted mb-3"></i>
+                    <p class="text-muted mb-0 fs-5">Nenhuma nota lançada no sistema até o momento.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

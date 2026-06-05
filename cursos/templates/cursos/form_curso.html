@@ -1,0 +1,52 @@
+{% extends "estudantes/base.html" %}
+
+{% block title %}{% if curso %}Editar Curso{% else %}Novo Curso{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-header text-white p-3 shadow-sm" style="background-color: #19081E;">
+                    <h3 class="card-title mb-0 fw-bold fs-5">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        {% if curso %}Modificar Curso: {{ curso.nome }}{% else %}Formulário de Curso{% endif %}
+                    </h3>
+                </div>
+                
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.nome.id_for_label }}" class="form-label fw-semibold text-secondary">{{ form.nome.label }}:</label>
+                            {{ form.nome }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.codigo.id_for_label }}" class="form-label fw-semibold text-secondary">{{ form.codigo.label }}:</label>
+                            {{ form.codigo }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label for="{{ form.carga_horaria.id_for_label }}" class="form-label fw-semibold text-secondary">{{ form.carga_horaria.label }}:</label>
+                                {{ form.carga_horaria }}
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label for="{{ form.turno.id_for_label }}" class="form-label fw-semibold text-secondary">{{ form.turno.label }}:</label>
+                                {{ form.turno }}
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4 pt-2 border-top">
+                            <a href="{% url 'cursos:listar_cursos' %}" class="btn btn-light px-4 fw-semibold border text-secondary">Voltar</a>
+                            <button type="submit" class="btn text-white px-4 fw-semibold shadow-sm" style="background-color: #761919;">Salvar Curso</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
