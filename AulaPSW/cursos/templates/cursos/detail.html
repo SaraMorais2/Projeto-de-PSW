@@ -1,0 +1,75 @@
+{% extends "estudantes/base.html" %}
+
+{% block title %}Detalhes do Curso{% endblock %}
+
+{% block content %}
+<div class="container-fluid pt-4">
+
+    <div class="mb-4">
+        <a href="{% url 'cursos:listar_cursos' %}" class="btn btn-sm btn-light border text-secondary fw-semibold">
+            <i class="fas fa-arrow-left mr-1"></i> Voltar para a Lista
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-header text-white py-3" style="background-color: #19081E;">
+                    <h6 class="m-0 fw-bold text-uppercase tracking-wide">
+                        <i class="fas fa-graduation-cap mr-2"></i>Ficha do Curso
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-dark font-weight-bold mb-3">{{ curso.nome }}</h4>
+                    <hr>
+                    <p class="mb-2"><strong>Código:</strong> <span class="text-secondary fw-semibold">{{ curso.codigo }}</span></p>
+                    <p class="mb-2"><strong>Carga Horária:</strong> <span class="badge bg-secondary text-white p-2">{{ curso.carga_horaria }}h</span></p>
+                    <p class="mb-0"><strong>Turno:</strong> <span class="font-weight-bold" style="color: #3A1844;">{{ curso.turno }}</span></p>
+                </div>
+                <div class="card-footer bg-light d-flex justify-content-around py-3">
+                    <a href="{% url 'cursos:atualizar_curso' id=curso.id %}" class="btn btn-sm btn-warning px-3 font-weight-bold">Editar</a>
+                    <a href="{% url 'cursos:deletar_curso' id=curso.id %}?confirm=yes" onclick="return confirm('Excluir curso?')" class="btn btn-sm btn-danger px-3 font-weight-bold">Excluir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white py-3">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fas fa-users mr-2"></i>Alunos Matriculados ({{ alunos.count }})
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    {% if alunos %}
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light text-dark">
+                                    <tr>
+                                        <th class="pl-4">Nome do Aluno</th>
+                                        <th>Matrícula</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for aluno in alunos %}
+                                    <tr>
+                                        <td class="pl-4 font-weight-bold text-dark">{{ aluno.nome }}</td>
+                                        <td class="text-secondary">{{ aluno.matricula }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="p-5 text-center">
+                            <i class="fas fa-user-slash fa-2x text-muted mb-3"></i>
+                            <p class="text-muted mb-0">Nenhum aluno matriculado neste curso ainda.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
