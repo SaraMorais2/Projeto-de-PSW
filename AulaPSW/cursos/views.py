@@ -8,16 +8,9 @@ def listar_cursos(request):
     return render(request, 'cursos/listar_cursos.html', {'cursos': cursos})
 
 def detail_curso(request, id):
-    
     curso = get_object_or_404(Curso, id=id)
-    
     alunos_do_curso = curso.alunos.all()
-    
-    context = {
-        'curso': curso,
-        'alunos': alunos_do_curso
-    }
-    return render(request, 'cursos/detail.html', context)
+    return render(request, 'cursos/detail.html', {'curso': curso, 'alunos': alunos_do_curso})
 
 def adicionar_curso(request):
     if request.method == 'POST':
